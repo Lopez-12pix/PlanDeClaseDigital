@@ -1,0 +1,482 @@
+
+/* =================================
+   ESTILOS GENERALES
+================================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+:root {
+  --morado: #5b3cc4;
+  --morado-oscuro: #35216f;
+  --lila: #eee9ff;
+  --turquesa: #b9f0e7;
+  --blanco: #ffffff;
+  --texto: #343047;
+  --gris: #6e6a80;
+  --fondo-claro: #faf9ff;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--blanco);
+  color: var(--texto);
+  line-height: 1.7;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* =================================
+   ENCABEZADO Y NAVEGACIÓN
+================================= */
+
+.encabezado {
+  background-color: var(--blanco);
+  border-bottom: 1px solid #eeeaf7;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.navbar {
+  max-width: 1150px;
+  margin: 0 auto;
+  padding: 18px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+.logo {
+  color: var(--morado);
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 22px;
+  list-style: none;
+}
+
+.menu a {
+  color: var(--texto);
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.menu a:hover {
+  color: var(--morado);
+}
+
+/* =================================
+   PRESENTACIÓN PRINCIPAL
+================================= */
+
+.hero {
+  max-width: 1150px;
+  margin: 0 auto;
+  padding: 75px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 45px;
+}
+
+.hero-texto {
+  flex: 1 1 400px;
+}
+
+.etiqueta {
+  display: inline-block;
+  color: var(--morado);
+  background-color: var(--lila);
+  padding: 6px 13px;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.hero h1 {
+  font-size: clamp(2.2rem, 5vw, 3.7rem);
+  line-height: 1.15;
+  margin: 22px 0;
+  color: var(--morado-oscuro);
+}
+
+.hero-texto > p {
+  max-width: 580px;
+  color: var(--gris);
+  font-size: 1.08rem;
+}
+
+.boton {
+  display: inline-block;
+  padding: 12px 22px;
+  margin-top: 25px;
+  margin-right: 10px;
+  border-radius: 10px;
+  font-weight: bold;
+  transition: transform 0.3s, background-color 0.3s;
+}
+
+.boton:hover {
+  transform: translateY(-3px);
+}
+
+.boton-principal {
+  background-color: var(--morado);
+  color: var(--blanco);
+}
+
+.boton-principal:hover {
+  background-color: var(--morado-oscuro);
+}
+
+.boton-secundario {
+  border: 2px solid var(--morado);
+  color: var(--morado);
+}
+
+.hero-ilustracion {
+  flex: 1 1 300px;
+  min-height: 330px;
+  background: linear-gradient(135deg, var(--lila), var(--turquesa));
+  border-radius: 45% 55% 55% 45% / 50% 45% 55% 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.circulo {
+  width: 245px;
+  height: 245px;
+  background-color: var(--blanco);
+  border-radius: 50%;
+  box-shadow: 0 15px 40px #35216f20;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.circulo span {
+  font-size: 2.5rem;
+  color: var(--morado);
+}
+
+.circulo h2 {
+  color: var(--morado-oscuro);
+  line-height: 1.3;
+}
+
+.circulo p {
+  color: var(--gris);
+  font-size: 0.9rem;
+  margin-top: 8px;
+}
+
+/* =================================
+   SECCIONES Y TÍTULOS
+================================= */
+
+.seccion {
+  padding: 75px 25px;
+}
+
+.seccion-clara {
+  background-color: var(--fondo-claro);
+}
+
+.contenedor {
+  max-width: 1150px;
+  margin: 0 auto;
+}
+
+.titulo-seccion {
+  max-width: 750px;
+  margin: 0 auto 18px;
+  text-align: center;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  line-height: 1.25;
+  color: var(--morado-oscuro);
+}
+
+.introduccion {
+  max-width: 720px;
+  margin: 0 auto 38px;
+  text-align: center;
+  color: var(--gris);
+}
+
+/* =================================
+   TARJETAS DE CONTENIDO
+================================= */
+
+.tarjetas {
+  max-width: 1150px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+  gap: 22px;
+}
+
+.tarjeta {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--blanco);
+  border: 1px solid #e9e3fa;
+  border-radius: 18px;
+  padding: 28px;
+  flex: 1 1 235px;
+  box-shadow: 0 8px 25px rgba(53, 33, 111, 0.08);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.tarjeta h3 {
+  margin-bottom: 10px;
+  color: var(--morado-oscuro);
+}
+
+.tarjeta p {
+  color: var(--gris);
+}
+
+.numero-tarjeta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  margin-bottom: 16px;
+  border-radius: 12px;
+  background-color: var(--lila);
+  color: var(--morado);
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .tarjeta:hover {
+    border-color: var(--morado);
+    box-shadow: 0 15px 30px rgba(53, 33, 111, 0.15);
+  }
+}
+
+/* =================================
+   ACTIVIDAD INTERACTIVA
+================================= */
+
+.actividad-interactiva {
+  max-width: 760px;
+  margin: 35px auto 0;
+  padding: 35px;
+  background-color: var(--blanco);
+  border: 1px solid #e9e3fa;
+  border-radius: 22px;
+  box-shadow: 0 8px 25px rgba(53, 33, 111, 0.08);
+}
+
+.actividad-interactiva h3 {
+  color: var(--morado-oscuro);
+  font-size: 1.5rem;
+  margin: 18px 0 12px;
+}
+
+.actividad-interactiva > p {
+  color: var(--gris);
+  margin-bottom: 25px;
+}
+
+.opciones {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.opcion {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 16px;
+  border: 1px solid #e9e3fa;
+  border-radius: 12px;
+  background-color: var(--fondo-claro);
+  color: var(--texto);
+  text-align: left;
+  font-size: 1rem;
+  font-family: inherit;
+  line-height: 1.5;
+  cursor: pointer;
+  transition: background-color 0.25s, border-color 0.25s;
+}
+
+.opcion span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--lila);
+  color: var(--morado);
+  font-weight: bold;
+}
+
+.opcion:hover,
+.opcion-seleccionada {
+  border-color: var(--morado);
+  background-color: var(--lila);
+}
+
+.opcion:focus-visible {
+  outline: 3px solid var(--turquesa);
+  outline-offset: 3px;
+}
+
+.retroalimentacion {
+  margin-top: 22px;
+  padding: 20px;
+  border-radius: 14px;
+}
+
+.retroalimentacion h4 {
+  margin-bottom: 8px;
+}
+
+.retroalimentacion p {
+  margin: 0;
+}
+
+.respuesta-correcta {
+  background-color: #e5f7ef;
+  color: #246344;
+}
+
+.respuesta-error {
+  background-color: #fff3e8;
+  color: #87511f;
+}
+
+/* =================================
+   MENSAJE FINAL
+================================= */
+
+.banner-final {
+  background: linear-gradient(120deg, var(--morado-oscuro), var(--morado));
+  color: var(--blanco);
+  padding: 65px 25px;
+  text-align: center;
+}
+
+.banner-final h2 {
+  font-size: clamp(1.7rem, 4vw, 2.5rem);
+  margin-bottom: 15px;
+}
+
+.banner-final p {
+  max-width: 650px;
+  margin: 0 auto 20px;
+}
+
+.boton-claro {
+  background-color: var(--blanco);
+  color: var(--morado);
+}
+
+/* =================================
+   PIE DE PÁGINA
+================================= */
+
+.pie {
+  padding: 25px;
+  text-align: center;
+  background-color: #241747;
+  color: #e5defb;
+  font-size: 0.9rem;
+}
+
+.pie p + p {
+  margin-top: 5px;
+  opacity: 0.8;
+}
+
+/* =================================
+   DISEÑO PARA CELULARES
+================================= */
+
+@media (max-width: 650px) {
+  .navbar {
+    justify-content: center;
+  }
+
+  .menu {
+    justify-content: center;
+    gap: 12px 18px;
+  }
+
+  .hero {
+    padding: 45px 20px;
+    gap: 30px;
+  }
+
+  .hero-ilustracion {
+    min-height: 280px;
+  }
+
+  .circulo {
+    width: 215px;
+    height: 215px;
+  }
+
+  .seccion {
+    padding: 50px 20px;
+  }
+
+  .tarjeta {
+    flex-basis: 100%;
+  }
+
+  .actividad-interactiva {
+    padding: 22px;
+  }
+
+  .actividad-interactiva h3 {
+    font-size: 1.25rem;
+  }
+
+  .opcion {
+    font-size: 0.92rem;
+    padding: 13px;
+  }
+}
+
+/* =================================
+   ACCESIBILIDAD
+================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
