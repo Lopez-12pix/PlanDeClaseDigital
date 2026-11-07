@@ -1,4 +1,3 @@
-
 import HeaderClase from "./components/HeaderClase";
 import ObjetivosCard from "./components/ObjetivosCard";
 import "./App.css";
@@ -73,7 +72,7 @@ function App() {
         <section className="hero" id="inicio">
           <div className="hero-texto">
             <span className="etiqueta">TECNOLOGÍA RESPONSABLE</span>
-            <h1>La IA es una herramienta. Tu criterio marca la diferencia.</h1>
+            <h1>La IA es una herramienta, tu criterio marca la diferencia.</h1>
             <p>
               Aprende a utilizar la inteligencia artificial de manera
               responsable, crítica y creativa. Descubre cómo aprovechar
@@ -87,13 +86,34 @@ function App() {
             </a>
           </div>
 
-          <div className="hero-ilustracion">
-            <div className="circulo">
-              <span>✦</span>
-              <h2>IA + Creatividad</h2>
-              <p>Aprender, pensar y crear</p>
-            </div>
-          </div>
+<div className="hero-ilustracion">
+
+  {/* Segundo anillo: parte trasera */}
+  <div className="anillos anillo-atras anillo-secundario"></div>
+
+  {/* Tercer anillo: parte trasera */}
+  <div className="anillos anillo-atras anillo-terciario"></div>
+
+  {/* Primer anillo: parte trasera */}
+  <div className="anillos anillo-atras"></div>
+
+  <div className="circulo">
+    <span>✦</span>
+    <h2>IA + Creatividad</h2>
+    <p>Aprender, pensar y crear</p>
+  </div>
+
+  {/* Primer anillo: parte delantera */}
+  <div className="anillos anillo-frente"></div>
+
+  {/* Segundo anillo: parte delantera */}
+  <div className="anillos anillo-frente anillo-secundario"></div>
+
+  {/* Tercer anillo: parte delantera */}
+  <div className="anillos anillo-frente anillo-terciario"></div>
+
+</div>
+
         </section>
 
         <section className="seccion" id="objetivos">
@@ -165,20 +185,15 @@ function App() {
           </div>
         </section>
 
-        <section className="banner-final">
-          <h2>La tecnología avanza. Tu responsabilidad también.</h2>
-          <p>
-            Aprende, crea y utiliza la inteligencia artificial
-            con criterio.
-          </p>
-          <a href="#inicio" className="boton boton-claro">
-            Volver al inicio ↑
-          </a>
-        </section>
+
+<section className="banner-final">
+  <h2>La tecnología avanza, tu responsabilidad también.</h2>
+
+</section>
       </main>
 
       <footer className="pie">
-        <p>IA con Criterio | Aprender, crear y actuar responsablemente.</p>
+        <p>IA con Criterio | Aprender, pensar y crear responsablemente.</p>
         <p>Proyecto educativo sobre el uso responsable de la inteligencia artificial.</p>
       </footer>
     </>

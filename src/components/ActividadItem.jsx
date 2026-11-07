@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 
 function ActividadItem({ numero, titulo, descripcion }) {
