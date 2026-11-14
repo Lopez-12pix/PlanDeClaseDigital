@@ -3,6 +3,7 @@ import ObjetivosCard from "./components/ObjetivosCard";
 import "./App.css";
 import ActividadItem from "./components/ActividadItem";
 import ActividadInteractiva from "./components/ActividadInteractiva";
+import ResumenEvaluaciones from "./components/ResumenEvaluaciones";
 
 function App() {
   const objetivos = [
@@ -163,27 +164,31 @@ function App() {
   </div>
 </section>
 
-        <section className="seccion seccion-clara" id="docentes">
-          <div className="contenedor">
-            <h2 className="titulo-seccion">
-              Orientaciones para docentes
-            </h2>
-            <p className="introduccion">
-              El docente acompaña a los estudiantes para que aprendan
-              a utilizar la inteligencia artificial con responsabilidad.
-            </p>
 
-            <div className="tarjetas">
-              {orientaciones.map((item) => (
-                <article className="tarjeta" key={item.numero}>
-                  <span className="numero-tarjeta">{item.numero}</span>
-                  <h3>{item.titulo}</h3>
-                  <p>{item.descripcion}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
+<section className="seccion seccion-clara" id="docentes">
+  <div className="contenedor">
+    <h2 className="titulo-seccion">
+      Orientaciones para docentes
+    </h2>
+
+    <p className="introduccion">
+      El docente acompaña a los estudiantes para que aprendan
+      a utilizar la inteligencia artificial con responsabilidad.
+    </p>
+
+    <div className="tarjetas">
+      {orientaciones.map((item) => (
+        <article className="tarjeta" key={item.numero}>
+          <span className="numero-tarjeta">{item.numero}</span>
+          <h3>{item.titulo}</h3>
+          <p>{item.descripcion}</p>
+        </article>
+      ))}
+    </div>
+
+    <ResumenEvaluaciones />
+  </div>
+</section>
 
 
 <section className="banner-final">
