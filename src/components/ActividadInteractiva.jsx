@@ -4,6 +4,11 @@ import { motion } from "framer-motion";
 
 function ActividadInteractiva() {
   const [respuestas, setRespuestas] = useState({});
+  const [nombre, setNombre] = useState("");
+  const [grado, setGrado] = useState("");
+  const [guardando, setGuardando] = useState(false);
+  const [mensaje, setMensaje] = useState("");
+  const [guardado, setGuardado] = useState(false);
 
   const preguntas = [
     {
@@ -26,10 +31,7 @@ function ActividadInteractiva() {
         "¿Qué deberías hacer si la IA te proporciona un dato que parece incorrecto?",
       opciones: [
         { id: "A", texto: "Aceptar el dato porque lo generó una IA." },
-        {
-          id: "B",
-          texto: "Ignorar la duda y utilizarlo en mi tarea.",
-        },
+        { id: "B", texto: "Ignorar la duda y utilizarlo en mi tarea." },
         {
           id: "C",
           texto: "Consultar fuentes confiables para comprobarlo.",
@@ -109,6 +111,60 @@ function ActividadInteractiva() {
       ...anteriores,
       [indice]: opcion,
     }));
+
+    setMensaje("");
+    setGuardado(false);
+  };
+
+  const puntaje = preguntas.filter(
+    (pregunta, indice) =>
+      respuestas[indice] === pregunta.correcta
+  ).length;
+
+  const enviarEvaluacion = async (e) => {
+    e.preventDefault();
+
+    if (!nombre.trim() || !grado.trim()) {
+      setMensaje("Completa tu nombre y grado.");
+      return;
+    }
+
+    if (Object.keys(respuestas).length !== preguntas.length) {
+      setMensaje("Debes responder las cinco preguntas.");
+      return;
+    }
+
+    setGuardando(true);
+    setMensaje("");
+
+    try {
+      const response = await fetch("/api/evaluaciones", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          nombre_estudiante: nombre.trim(),
+          grado: grado.trim(),
+          respuestas: JSON.stringify(respuestas),
+          puntaje: puntaje,
+          fecha: new Date().toISOString().split("T")[0],
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "No se pudo guardar la evaluación.");
+      }
+
+      setGuardado(true);
+      setMensaje("¡Evaluación guardada correctamente!");
+    } catch (error) {
+      setMensaje(error.message || "Ocurrió un error al guardar.");
+    } finally {
+      setGuardando(false);
+    }
   };
 
   return (
@@ -129,82 +185,129 @@ function ActividadInteractiva() {
         responsable de la inteligencia artificial.
       </p>
 
-      {preguntas.map((pregunta, indice) => {
-        const respuesta = respuestas[indice];
+      <form onSubmit={enviarEvaluacion}>
+        <div className="datos-estudiante">
+          <h3>Datos del estudiante</h3>
 
-        return (
-          <div className="pregunta-actividad" key={indice}>
-            <h3>
-              {indice + 1}. {pregunta.pregunta}
-            </h3>
+          <label htmlFor="nombre-estudiante">
+            Nombre completo
+          </label>
+          <input
+            id="nombre-estudiante"
+            type="text"
+            value={nombre}
+            onChange={(e) => setNombre(e.target.value)}
+            placeholder="Escribe tu nombre"
+            required
+          />
 
-            <div className="opciones">
-              {pregunta.opciones.map((opcion) => (
-                <button
-                  key={opcion.id}
-                  className={`opcion ${
-                    respuesta === opcion.id
-                      ? "opcion-seleccionada"
-                      : ""
+          <label htmlFor="grado-estudiante">Grado y sección</label>
+          <input
+            id="grado-estudiante"
+            type="text"
+            value={grado}
+            onChange={(e) => setGrado(e.target.value)}
+            placeholder="Ej. Cuarto Bachillerato, sección A"
+            required
+          />
+        </div>
+
+        {preguntas.map((pregunta, indice) => {
+          const respuesta = respuestas[indice];
+
+          return (
+            <div className="pregunta-actividad" key={indice}>
+              <h3>
+                {indice + 1}. {pregunta.pregunta}
+              </h3>
+
+              <div className="opciones">
+                {pregunta.opciones.map((opcion) => (
+                  <button
+                    key={opcion.id}
+                    type="button"
+                    className={`opcion ${
+                      respuesta === opcion.id
+                        ? "opcion-seleccionada"
+                        : ""
+                    }`}
+                    onClick={() =>
+                      seleccionarRespuesta(indice, opcion.id)
+                    }
+                  >
+                    <span>{opcion.id}</span>
+                    {opcion.texto}
+                  </button>
+                ))}
+              </div>
+
+              {respuesta && (
+                <motion.div
+                  className={`retroalimentacion ${
+                    respuesta === pregunta.correcta
+                      ? "respuesta-correcta"
+                      : "respuesta-error"
                   }`}
-                  onClick={() =>
-                    seleccionarRespuesta(indice, opcion.id)
-                  }
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
                 >
-                  <span>{opcion.id}</span>
-                  {opcion.texto}
-                </button>
-              ))}
+                  {respuesta === pregunta.correcta ? (
+                    <>
+                      <h4>¡Muy bien! Respuesta correcta.</h4>
+                      <p>{pregunta.explicacion}</p>
+                    </>
+                  ) : (
+                    <>
+                      <h4>¡Puedes intentarlo de nuevo!</h4>
+                      <p>
+                        Revisa las opciones y piensa cuál refleja
+                        un uso responsable de la inteligencia artificial.
+                      </p>
+                    </>
+                  )}
+                </motion.div>
+              )}
             </div>
+          );
+        })}
 
-            {respuesta && (
-              <motion.div
-                className={`retroalimentacion ${
-                  respuesta === pregunta.correcta
-                    ? "respuesta-correcta"
-                    : "respuesta-error"
-                }`}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-              >
-                {respuesta === pregunta.correcta ? (
-                  <>
-                    <h4>¡Muy bien! Respuesta correcta.</h4>
-                    <p>{pregunta.explicacion}</p>
-                  </>
-                ) : (
-                  <>
-                    <h4>¡Puedes intentarlo de nuevo!</h4>
-                    <p>
-                      Revisa las opciones y piensa cuál refleja
-                      un uso responsable de la inteligencia artificial.
-                    </p>
-                  </>
-                )}
-              </motion.div>
-            )}
-          </div>
-        );
-      })}
+        {Object.keys(respuestas).length === preguntas.length && (
+          <motion.div
+            className="retroalimentacion respuesta-correcta"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+          >
+            <h4>¡Has completado el reto!</h4>
+            <p>
+              Respuestas correctas: {puntaje} de {preguntas.length}.
+              Sigue utilizando la IA con responsabilidad y
+              pensamiento crítico.
+            </p>
+          </motion.div>
+        )}
 
-      {Object.keys(respuestas).length === preguntas.length && (
-        <motion.div
-          className="retroalimentacion respuesta-correcta"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+        <button
+          type="submit"
+          className="boton-guardar"
+          disabled={guardando || guardado}
         >
-          <h4>¡Has completado el reto!</h4>
-          <p>
-            Respuestas correctas:{" "}
-            {preguntas.filter(
-              (pregunta, indice) =>
-                respuestas[indice] === pregunta.correcta
-            ).length}{" "}
-            de {preguntas.length}. Sigue utilizando la IA con
-            responsabilidad y pensamiento crítico.
-          </p>
-        </motion.div>
-      )}
+          {guardando
+            ? "Guardando evaluación..."
+            : guardado
+              ? "Evaluación guardada"
+              : "Enviar evaluación"}
+        </button>
+
+        {mensaje && (
+          <motion.p
+            className={guardado ? "mensaje-exito" : "mensaje-error"}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+          >
+            {mensaje}
+          </motion.p>
+        )}
+      </form>
     </motion.div>
   );
 }
