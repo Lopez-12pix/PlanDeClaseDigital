@@ -116,7 +116,7 @@ function App() {
 
         </section>
 
-        <section className="seccion" id="objetivos">
+        <section className="seccion seccion-morada" id="objetivos">
           <div className="contenedor">
             <h2 className="titulo-seccion">¿Qué aprenderemos?</h2>
             <p className="introduccion">
@@ -147,7 +147,7 @@ function App() {
           </div>
         </section>
 
-<section className="seccion" id="estudiantes">
+<section className="seccion seccion-morada" id="estudiantes">
   <div className="contenedor">
     <h2 className="titulo-seccion">
       ¡Pon a prueba tu criterio!
@@ -188,16 +188,27 @@ function App() {
 
 <section className="banner-final">
   <h2>La tecnología avanza, tu responsabilidad también.</h2>
-
 </section>
-      </main>
+</main>
 
-      <footer className="pie">
-        <p>IA con Criterio | Aprender, pensar y crear responsablemente.</p>
-        <p>Proyecto educativo sobre el uso responsable de la inteligencia artificial.</p>
-      </footer>
-    </>
-  );
+<footer className="pie">
+  <div className="pie-contenido">
+    <div className="pie-frase">
+      <h3>IA con Criterio</h3>
+      <p>Aprender, pensar y crear responsablemente.</p>
+      <span>Proyecto educativo sobre el uso responsable de la inteligencia artificial.</span>
+    </div>
+
+    <div className="pie-autor">
+      <span>Desarrollado por</span>
+      <h4>Mabelin Gisleny Ramirez López</h4>
+      <p>Carné: 33202595</p>
+    </div>
+  </div>
+</footer>
+</>
+);
 }
+
 
 export default App;

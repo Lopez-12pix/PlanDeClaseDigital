@@ -20,12 +20,7 @@
   --fondo-claro: #faf9ff;
 }
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: var(--blanco);
-  color: var(--texto);
-  line-height: 1.7;
-}
+
 
 a {
   text-decoration: none;
@@ -58,6 +53,8 @@ a {
   color: var(--morado);
   font-size: 1.4rem;
   font-weight: bold;
+  font-family: Georgia, serif;
+  font-style: italic;
 }
 
 .menu {
@@ -117,8 +114,10 @@ a {
 
 .hero-texto > p {
   max-width: 580px;
+  margin: 0 auto;
   color: var(--gris);
   font-size: 1.08rem;
+  text-align: center;
 }
 
 .boton {
@@ -150,6 +149,7 @@ a {
 }
 
 /* CONTENEDOR PRINCIPAL */
+
 .hero-ilustracion {
   position: relative;
   isolation: isolate;
@@ -164,6 +164,7 @@ a {
 }
 
 /* CÍRCULO CENTRAL */
+
 .circulo {
   position: relative;
   z-index: 2;
@@ -171,7 +172,7 @@ a {
   height: 245px;
   background-color: var(--blanco);
   border-radius: 50%;
-  box-shadow: 0 5px 50px #56037c3d;
+  box-shadow: 0 5px 50px #56037ca0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -180,6 +181,7 @@ a {
 }
 
 /* ESTILO GENERAL DE LOS ANILLOS */
+
 .anillos {
   position: absolute;
   box-sizing: border-box;
@@ -188,25 +190,28 @@ a {
 }
 
 /* PRIMER ANILLO: TURQUESA */
+
 .anillo-atras,
 .anillo-frente {
   width: 380px;
   height: 330px;
   border: 28px solid #A8EDE4;
-  animation: giro-anillos 7s linear infinite;
+  animation: giro-anillos 8s linear infinite;
 }
 
 /* SEGUNDO ANILLO: MORADO */
+
 .anillo-secundario {
   width: 380px;
   height: 400px;
   border: 18px solid #8065df;
   opacity: 0.75;
   z-index: 0;
-  animation: segundo-giro 15s linear infinite;
+  animation: segundo-giro 17s linear infinite;
 }
 
 /* PARTE TRASERA DEL PRIMER ANILLO */
+
 .anillo-atras {
   z-index: 1;
   clip-path: inset(0 0 50% 0);
@@ -214,33 +219,36 @@ a {
 }
 
 /* PARTE DELANTERA DEL PRIMER ANILLO */
+
 .anillo-frente {
   z-index: 3;
   clip-path: inset(50% 0 0 0);
 }
 
-
 /* TERCER ANILLO: LILA */
+
 .anillo-terciario {
   width: 400px;
   height: 430px;
-  border: 16px solid #C5B5F5;
-  opacity: 0.85;
-  animation: tercer-giro 8s linear infinite;
+  border: 16px solid #bbafdf;
+  opacity: 10;
+  animation: tercer-giro 10s linear infinite;
 }
 
 /* PARTE TRASERA DEL TERCER ANILLO */
+
 .anillo-terciario.anillo-atras {
   z-index: 0;
 }
 
 /* PARTE DELANTERA DEL TERCER ANILLO */
+
 .anillo-terciario.anillo-frente {
-  z-index: 3;
+  z-index: 50;
 }
 
-
 /* ANIMACIÓN DEL PRIMER ANILLO */
+
 @keyframes giro-anillos {
   0% {
     transform: rotateX(65deg) rotateY(0deg) rotateZ(-20deg);
@@ -264,6 +272,7 @@ a {
 }
 
 /* ANIMACIÓN DEL SEGUNDO ANILLO */
+
 @keyframes segundo-giro {
   0% {
     transform: rotateX(65deg) rotateY(0deg) rotateZ(-20deg);
@@ -287,25 +296,26 @@ a {
 }
 
 /* ANIMACIÓN DEL TERCER ANILLO */
+
 @keyframes tercer-giro {
   0% {
     transform: rotateX(100deg) rotateY(0deg) rotateZ(-20deg);
   }
 
   25% {
-    transform: rotateX(100deg) rotateY(-90deg) rotateZ(0deg);
+    transform: rotateX(100deg) rotateY(-90deg) rotateZ(50deg);
   }
 
   50% {
-    transform: rotateX(100deg) rotateY(-180deg) rotateZ(0deg);
+    transform: rotateX(100deg) rotateY(-180deg) rotateZ(40deg);
   }
 
   75% {
-    transform: rotateX(100deg) rotateY(-270deg) rotateZ(0deg);
+    transform: rotateX(100deg) rotateY(-270deg) rotateZ(30deg);
   }
 
   100% {
-    transform: rotateX(100deg) rotateY(-360deg) rotateZ(0deg);
+    transform: rotateX(100deg) rotateY(-360deg) rotateZ(5deg);
   }
 }
 
@@ -318,7 +328,20 @@ a {
 }
 
 .seccion-clara {
-  background-color: var(--fondo-claro);
+  background-color: #f0ebff;
+}
+
+/* Secciones con fondo morado */
+.seccion-morada {
+  background-color: var(--morado-oscuro);
+}
+
+.seccion-morada .titulo-seccion {
+  color: var(--blanco);
+}
+
+.seccion-morada .introduccion {
+  color: #e5defb;
 }
 
 .contenedor {
@@ -415,10 +438,26 @@ a {
   box-shadow: 0 8px 25px rgba(53, 33, 111, 0.08);
 }
 
-.actividad-interactiva h3 {
+.actividad-interactiva > h3 {
   color: var(--morado-oscuro);
-  font-size: 1.5rem;
+  font-size: 1.4rem;
+  line-height: 1.3;
   margin: 18px 0 12px;
+}
+
+/* Enunciados de cada pregunta */
+.pregunta-actividad {
+  margin-top: 26px;
+  padding-top: 22px;
+  border-top: 1px solid #e9e3fa;
+}
+
+.pregunta-actividad h3 {
+  color: var(--morado-oscuro);
+  font-size: 1rem;
+  line-height: 1.5;
+  font-weight: 600;
+  margin: 0 0 15px;
 }
 
 .actividad-interactiva > p {
@@ -501,24 +540,21 @@ a {
    MENSAJE FINAL
 ================================= */
 
-
-/* =================================
-   MENSAJE FINAL
-================================= */
-
 .banner-final {
   background-color: var(--fondo-claro);
   color: var(--morado-oscuro);
-  padding: 45px 25px;
+  padding: 55px 25px;
   text-align: center;
   border-top: 1px solid #eeeaf7;
 }
 
 .banner-final h2 {
-  color: var(--morado-oscuro);
-  font-size: clamp(1.7rem, 4vw, 2.5rem);
-  line-height: 1.25;
-  margin-bottom: 12px;
+  color: var(--morado);
+  font-family: "Georgia", "Times New Roman", serif;
+  font-style: italic;
+  font-size: clamp(1.8rem, 4vw, 2.7rem);
+  line-height: 1.3;
+  font-weight: 500;
 }
 
 .banner-final p {
@@ -532,16 +568,52 @@ a {
 ================================= */
 
 .pie {
-  padding: 20px 25px;
-  text-align: center;
+  padding: 30px 25px;
   background-color: #241747;
   color: #e5defb;
   font-size: 0.9rem;
 }
 
-.pie p + p {
-  margin-top: 5px;
+.pie-contenido {
+  max-width: 950px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+}
+
+.pie-frase,
+.pie-autor {
+  flex: 1;
+  text-align: center;
+}
+
+.pie-frase h3 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+
+.pie-frase p,
+.pie-autor p {
+  margin: 4px 0;
+  font-size: 0.85rem;
+  opacity: 0.85;
+}
+
+.pie-autor > span {
+  font-size: 0.85rem;
   opacity: 0.8;
+}
+
+.pie-autor h4 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 6px 0;
 }
 
 /* =================================
@@ -584,8 +656,12 @@ a {
     padding: 22px;
   }
 
-  .actividad-interactiva h3 {
-    font-size: 1.25rem;
+  .actividad-interactiva > h3 {
+    font-size: 1.2rem;
+  }
+
+  .pregunta-actividad h3 {
+    font-size: 0.98rem;
   }
 
   .opcion {
@@ -598,7 +674,12 @@ a {
   }
 
   .pie {
-    padding: 18px 20px;
+    padding: 25px 20px;
+  }
+
+  .pie-contenido {
+    flex-direction: column;
+    gap: 20px;
   }
 }
 
