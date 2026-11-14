@@ -10,6 +10,14 @@ export default async function handler(req, res) {
 
   const url = `https://app.nocodb.com/api/v2/tables/${NOCODB_TABLE_ID}/records`;
 
+  const metodosPermitidos = ["GET", "POST", "PATCH", "DELETE"];
+
+  if (!metodosPermitidos.includes(req.method)) {
+    return res.status(405).json({
+      error: "Método no permitido."
+    });
+  }
+
   try {
     const options = {
       method: req.method,
@@ -20,11 +28,25 @@ export default async function handler(req, res) {
     };
 
     if (["POST", "PATCH", "DELETE"].includes(req.method)) {
-      options.body = JSON.stringify(req.body);
-    }
+      let registros = req.body;
 
-    if (!["GET", "POST", "PATCH", "DELETE"].includes(req.method)) {
-      return res.status(405).json({ error: "Método no permitido." });
+      if (!Array.isArray(registros)) {
+        registros = [registros];
+      }
+
+      if (["PATCH", "DELETE"].includes(req.method)) {
+        const idsValidos = registros.every(
+          registro => registro && registro.Id !== undefined
+        );
+
+        if (!idsValidos) {
+          return res.status(400).json({
+            error: "Cada registro debe incluir su Id."
+          });
+        }
+      }
+
+      options.body = JSON.stringify(registros);
     }
 
     const response = await fetch(url, options);
